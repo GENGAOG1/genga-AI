@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Chat · GENGA AI{% endblock %}
+{% block content %}
+<div class="chat-layout">
+<aside class="sidebar"><button id="new-chat">＋ Neuer Chat</button><h3>Verlauf</h3>
+{% for c in chats %}<a class="chat-link" href="/chat/?id={{ c[0] }}">{{ c[1] }}</a>{% endfor %}
+</aside>
+<section class="chat-main">
+<div id="messages" class="messages" data-chat-id="{{ active_chat[0] if active_chat else '' }}">
+{% if messages %}{% for m in messages %}<div class="message {{ m[0] }}">{{ m[1] }}</div>{% endfor %}
+{% else %}<div class="message assistant">Hi! Was möchtest du machen?</div>{% endif %}
+</div>
+<form id="chat-form" class="composer"><textarea id="message-input" rows="2" placeholder="Nachricht an GENGA AI…"></textarea>
+<label class="attach">＋ Datei<input id="file-input" type="file" hidden></label><button type="submit">Senden ↑</button></form>
+<div id="upload-status"></div><small>KI-Antworten können Fehler enthalten.</small>
+</section></div>{% endblock %}
